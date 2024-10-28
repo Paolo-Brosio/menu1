@@ -20,8 +20,8 @@
         }
         .container {
             display: flex;
-            width: 100%;
-            height: 100%;
+            width: 90vw;
+            height: 90vh;
             position: relative;
         }
         .page {
@@ -44,21 +44,27 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
         }
         .button {
             background-color: rgba(0, 0, 255, 0.3);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px;
             cursor: pointer;
-            margin: 0 10px;
+            font-size: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
 
 <div class="container" id="menuContainer">
-    <!-- Pagina 1 a destra -->
+    <!-- Sezioni per ogni visualizzazione -->
     <div class="page hidden" id="page2">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
@@ -68,14 +74,14 @@
     <div class="page hidden" id="page4">
         <img src="pagina4.jpg" alt="Pagina 4">
     </div>
-    <div class="page" id="page1"> <!-- Pagina 1 a destra all'inizio -->
+    <div class="page" id="page1"> <!-- Pagina 1, inizialmente visibile e posizionata a destra -->
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
 </div>
 
 <div class="buttons">
-    <button class="button" onclick="prevPage()">Indietro</button>
-    <button class="button" onclick="nextPage()">Avanti</button>
+    <button class="button" onclick="prevPage()">⬅️</button>
+    <button class="button" onclick="nextPage()">➡️</button>
 </div>
 
 <script>
@@ -90,12 +96,12 @@
 
         // Mostra la pagina corretta in base a currentPage
         if (currentPage === 0) {
-            document.getElementById("page1").classList.remove("hidden"); // Pagina 1 a destra
+            document.getElementById("page1").classList.remove("hidden"); // Mostra solo pagina 1 (a destra)
         } else if (currentPage === 1) {
-            document.getElementById("page2").classList.remove("hidden"); // Pagina 2 a sinistra
-            document.getElementById("page3").classList.remove("hidden"); // Pagina 3 a destra
+            document.getElementById("page2").classList.remove("hidden"); // Mostra pagina 2 a sinistra
+            document.getElementById("page3").classList.remove("hidden"); // e pagina 3 a destra
         } else if (currentPage === 2) {
-            document.getElementById("page4").classList.remove("hidden"); // Pagina 4 a sinistra
+            document.getElementById("page4").classList.remove("hidden"); // Mostra solo pagina 4 (a sinistra)
         }
     }
 
