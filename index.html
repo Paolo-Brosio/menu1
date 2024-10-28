@@ -7,95 +7,88 @@
     <style>
         body {
             margin: 0;
-            background-color: #f0f0f0; /* Colore di sfondo */
-        }
-        .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Occupa l'intera altezza della finestra */
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1328px;
             position: relative;
+            display: flex;
+            overflow: hidden;
         }
         .page {
-            width: 50%; /* Ogni pagina occupa il 50% dello schermo */
-            height: auto; /* Mantieni l'altezza automatica */
-            transition: opacity 0.5s ease; /* Transizione per la visibilità */
-            position: absolute; /* Posizionamento assoluto */
-            opacity: 0; /* Inizialmente invisibile */
+            width: 50%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            transition: transform 0.5s ease;
+            opacity: 0;
         }
         .visible {
-            opacity: 1; /* Mostra la pagina quando è visibile */
-        }
-        .hidden {
-            display: none; /* Nasconde la pagina */
+            opacity: 1;
         }
         .button {
             position: absolute;
-            bottom: 20px; /* Posiziona i pulsanti in basso */
-            background-color: transparent; /* Pulsante trasparente */
-            border: none; /* Rimuovi il bordo */
-            font-size: 24px; /* Dimensione del testo */
-            cursor: pointer; /* Cambia il cursore su hover */
+            bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
         }
         .left {
-            left: 20px; /* Pulsante a sinistra */
+            left: 10px;
         }
         .right {
-            right: 20px; /* Pulsante a destra */
+            right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img id="page0" class="page" src="pagina0.jpg" style="left: 0;"> <!-- Prima pagina a sinistra -->
-        <img id="page1" class="page" src="pagina1.jpg" style="left: 1328px;"> <!-- Posizionata a destra -->
-        <img id="page2" class="page" src="pagina2.jpg">
-        <img id="page3" class="page" src="pagina3.jpg">
-        <img id="page4" class="page" src="pagina4.jpg" style="left: 0;"> <!-- Posizionata a sinistra -->
-
-        <button class="button left" onclick="changePage(-1)">&#9664;</button> <!-- Freccia sinistra -->
-        <button class="button right" onclick="changePage(1)">&#9654;</button> <!-- Freccia destra -->
+        <img id="page0" class="page" src="pagina0.png" style="left: 0;">
+        <img id="page1" class="page" src="pagina1.jpg" style="left: 50%;">
+        <img id="page2" class="page" src="pagina2.jpg" style="left: 0;">
+        <img id="page3" class="page" src="pagina3.jpg" style="left: 50%;">
+        <img id="page4" class="page" src="pagina4.jpg" style="left: 0;">
+        
+        <button class="button left" onclick="changePage(-1)">&#9664;</button>
+        <button class="button right" onclick="changePage(1)">&#9654;</button>
     </div>
 
     <script>
-        let currentPage = 0;
-
-        function changePage(direction) {
-            currentPage += direction;
-            if (currentPage < 0) currentPage = 0;
-            if (currentPage > 3) currentPage = 3; // Cambiato a 3 per includere pagina4
-            updatePages();
-        }
+        const pages = [
+            ["page0", "page1"], // Visualizzazione iniziale: pagina0 (bianca) e pagina1
+            ["page2", "page3"], // Visualizzazione aperta: pagina2 e pagina3
+            ["page4"]           // Ultima pagina: pagina4 da sola
+        ];
+        
+        let currentPageIndex = 0;
 
         function updatePages() {
-            // Nascondi tutte le pagine
-            document.getElementById("page0").classList.add("hidden");
-            document.getElementById("page1").classList.add("hidden");
-            document.getElementById("page2").classList.add("hidden");
-            document.getElementById("page3").classList.add("hidden");
-            document.getElementById("page4").classList.add("hidden");
+            // Nasconde tutte le pagine
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('visible'));
 
-            if (currentPage === 0) {
-                // Mostra Pagina 0
-                document.getElementById("page0").classList.remove("hidden");
-                document.getElementById("page0").classList.add("visible");
-            } else if (currentPage === 1) {
-                // Mostra Pagina 1
-                document.getElementById("page1").style.left = '1328px'; // Sposta pagina 1 a destra
-                document.getElementById("page1").classList.remove("hidden"); // Mostra pagina 1
-                document.getElementById("page1").classList.add("visible");
-                document.getElementById("page2").classList.remove("hidden"); // Mostra pagina 2
-                document.getElementById("page2").classList.add("visible");
-                document.getElementById("page3").classList.remove("hidden"); // Mostra pagina 3
-                document.getElementById("page3").classList.add("visible");
-            } else if (currentPage === 2) {
-                // Mostra Pagina 4
-                document.getElementById("page4").classList.remove("hidden");
-                document.getElementById("page4").classList.add("visible");
+            // Mostra le pagine del set corrente
+            pages[currentPageIndex].forEach(pageId => {
+                document.getElementById(pageId).classList.add('visible');
+            });
+        }
+
+        function changePage(direction) {
+            // Cambia la pagina solo se ci sono pagine successive o precedenti
+            const newIndex = currentPageIndex + direction;
+            if (newIndex >= 0 && newIndex < pages.length) {
+                currentPageIndex = newIndex;
+                updatePages();
             }
         }
 
-        // Inizializza la visualizzazione della prima pagina
+        // Inizializza la visualizzazione
         updatePages();
     </script>
 </body>
