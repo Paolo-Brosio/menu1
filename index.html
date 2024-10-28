@@ -58,14 +58,14 @@
 <body>
 
 <div class="container" id="menuContainer">
-    <div class="page" id="page1">
-        <img src="pagina1.jpg" alt="Pagina 1">
-    </div>
     <div class="page" id="page2" class="hidden">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
     <div class="page" id="page3" class="hidden">
         <img src="pagina3.jpg" alt="Pagina 3">
+    </div>
+    <div class="page" id="page1">
+        <img src="pagina1.jpg" alt="Pagina 1">
     </div>
     <div class="page" id="page4" class="hidden">
         <img src="pagina4.jpg" alt="Pagina 4">
@@ -87,10 +87,10 @@
         });
 
         if (currentPage === 0) {
-            pages[0].classList.remove('hidden'); // Mostra Pagina 1
+            pages[2].classList.remove('hidden'); // Mostra Pagina 1 (ora a destra)
         } else if (currentPage === 1) {
-            pages[1].classList.remove('hidden'); // Mostra Pagina 2
-            pages[2].classList.remove('hidden'); // Mostra Pagina 3
+            pages[0].classList.remove('hidden'); // Mostra Pagina 2
+            pages[1].classList.remove('hidden'); // Mostra Pagina 3
         } else if (currentPage === 2) {
             pages[3].classList.remove('hidden'); // Mostra Pagina 4
         }
