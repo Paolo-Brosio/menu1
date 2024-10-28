@@ -5,91 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Digitale</title>
     <style>
-        body {
+        /* Stile di base */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background: url('sfondo.jpg') center center / cover no-repeat;
+            overflow: hidden;
         }
         .container {
-            width: 100%;
-            max-width: 1328px;
-            position: relative;
             display: flex;
-            overflow: hidden;
+            width: 90%;
+            height: 100%;
+            position: relative;
         }
         .page {
             width: 50%;
-            height: auto;
-            position: absolute;
-            top: 0;
-            transition: transform 0.5s ease;
-            opacity: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .visible {
-            opacity: 1;
+        .page img {
+            width: 100%;
+            height: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .button {
-            position: absolute;
-            bottom: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: none;
-            font-size: 24px;
+            background-color: rgba(0, 0, 255, 0.5);
             color: white;
+            border: none;
+            padding: 10px 20px;
             cursor: pointer;
-        }
-        .left {
-            left: 10px;
-        }
-        .right {
-            right: 10px;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img id="page0" class="page" src="pagina0.png" style="left: 0;">
-        <img id="page1" class="page" src="pagina1.jpg" style="left: 50%;">
-        <img id="page2" class="page" src="pagina2.jpg" style="left: 0;">
-        <img id="page3" class="page" src="pagina3.jpg" style="left: 50%;">
-        <img id="page4" class="page" src="pagina4.jpg" style="left: 0;">
-        
-        <button class="button left" onclick="changePage(-1)">&#9664;</button>
-        <button class="button right" onclick="changePage(1)">&#9654;</button>
+
+<div class="container" id="menuContainer">
+    <div class="page hidden" id="page0">
+        <img src="pagina0.png" alt="Pagina 0">
     </div>
+    <div class="page hidden" id="page2">
+        <img src="pagina2.jpg" alt="Pagina 2">
+    </div>
+    <div class="page hidden" id="page3">
+        <img src="pagina3.jpg" alt="Pagina 3">
+    </div>
+    <div class="page" id="page1">
+        <img src="pagina1.jpg" alt="Pagina 1">
+    </div>
+    <div class="page hidden" id="page4">
+        <img src="pagina4.jpg" alt="Pagina 4">
+    </div>
+</div>
 
-    <script>
-        const pages = [
-            ["page0", "page1"], // Visualizzazione iniziale: pagina0 (bianca) e pagina1
-            ["page2", "page3"], // Visualizzazione aperta: pagina2 e pagina3
-            ["page4"]           // Ultima pagina: pagina4 da sola
-        ];
-        
-        let currentPageIndex = 0;
+<div class="buttons">
+    <button class="button" onclick="prevPage()">Indietro</button>
+    <button class="button" onclick="nextPage()">Avanti</button>
+</div>
 
-        function updatePages() {
-            // Nasconde tutte le pagine
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('visible'));
+<script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
 
-            // Mostra le pagine del set corrente
-            pages[currentPageIndex].forEach(pageId => {
-                document.getElementById(pageId).classList.add('visible');
-            });
+    function updatePages() {
+        pages.forEach((page, index) => {
+            page.classList.add('hidden');
+        });
+
+        if (currentPage === 0) {
+            pages[0].classList.remove('hidden'); // Mostra Pagina 0 (sinistra)
+            pages[3].classList.remove('hidden'); // Mostra Pagina 1 (destra)
+        } else if (currentPage === 1) {
+            pages[1].classList.remove('hidden'); // Mostra Pagina 2 (sinistra)
+            pages[2].classList.remove('hidden'); // Mostra Pagina 3 (destra)
+        } else if (currentPage === 2) {
+            pages[4].classList.remove('hidden'); // Mostra Pagina 4 (sinistra)
         }
+    }
 
-        function changePage(direction) {
-            // Cambia la pagina solo se ci sono pagine successive o precedenti
-            const newIndex = currentPageIndex + direction;
-            if (newIndex >= 0 && newIndex < pages.length) {
-                currentPageIndex = newIndex;
-                updatePages();
-            }
+    function nextPage() {
+        if (currentPage < 2) {
+            currentPage++;
+            updatePages();
         }
+    }
 
-        // Inizializza la visualizzazione
-        updatePages();
-    </script>
+    function prevPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            updatePages();
+        }
+    }
+
+    // Inizializza mostrando la prima pagina
+    updatePages();
+</script>
+
 </body>
 </html>
