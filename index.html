@@ -5,65 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Digitale</title>
     <style>
+        /* Impostazioni di stile di base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background: url('sfondo.jpg') center center / cover no-repeat;
+            overflow: hidden;
             margin: 0;
-            background-color: #f5f5f5;
         }
         .container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            height: 80%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: opacity 0.5s;
-            width: 100%;
-            max-width: 400px; /* Limita la larghezza per schermi grandi */
-        }
-        .pages {
-            display: none; /* Nasconde le pagine inizialmente */
-            flex-wrap: nowrap; /* Evita spazi tra le pagine */
             justify-content: center;
             align-items: center;
         }
-        .pages img {
-            max-width: 100%; /* Adatta le immagini alla larghezza del contenitore */
-            height: auto; /* Mantiene le proporzioni */
+        .pages {
+            display: none;
+            position: absolute;
+            transition: transform 0.6s ease; /* Animazione di scorrimento */
         }
         .visible {
-            display: flex; /* Mostra solo il gruppo di pagine visibili */
+            display: flex;
         }
-        /* Imposta margini per dispositivi mobili */
+        .pages img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        /* Pagina singola centrata */
         #page1 img {
-            margin: 0 10px; /* Aggiunge margini laterali per la pagina 1 */
+            margin-left: 50%;
+            transform: translateX(-50%);
         }
-        /* Per due pagine affiancate */
+        /* Due pagine affiancate */
+        #page2-3 {
+            display: flex;
+        }
         #page2-3 img {
-            max-width: 50%; /* Ogni immagine usa metà dello schermo */
+            max-width: 50%;
         }
+        /* Pagina singola a sinistra */
+        #page4 img {
+            margin-right: 50%;
+            transform: translateX(50%);
+        }
+        /* Stile dei pulsanti */
         .button-container {
-            margin-top: 20px; /* Spaziatura sopra i pulsanti */
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
         }
         .button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            background-color: #007bff;
+            background: rgba(0, 0, 0, 0.5);
             color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
             cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: rgba(0, 0, 0, 0.7);
         }
         .button:disabled {
-            background-color: #ccc;
+            opacity: 0.5;
             cursor: not-allowed;
+        }
+        /* Icone per i pulsanti */
+        .button.left::before {
+            content: '←';
+            font-size: 20px;
+        }
+        .button.right::before {
+            content: '→';
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Pagine del menu -->
         <div class="pages visible" id="page1">
             <img src="pagina1.jpg" alt="Pagina 1">
         </div>
@@ -74,10 +107,12 @@
         <div class="pages" id="page4">
             <img src="pagina4.jpg" alt="Pagina 4">
         </div>
-    </div>
-    <div class="button-container">
-        <button class="button" id="prevButton" disabled>← Indietro</button>
-        <button class="button" id="nextButton">Avanti →</button>
+
+        <!-- Contenitore dei pulsanti -->
+        <div class="button-container">
+            <button class="button left" id="prevButton" disabled></button>
+            <button class="button right" id="nextButton"></button>
+        </div>
     </div>
 
     <script>
@@ -97,24 +132,32 @@
             for (const key in pages) {
                 pages[key].classList.remove('visible');
             }
-            // Mostra la pagina corrente
+            // Mostra la pagina corrente con effetto di transizione
             pages[currentPage].classList.add('visible');
 
             // Aggiorna lo stato dei pulsanti
-            prevButton.disabled = (currentPage === 1); // Disabilita "Indietro" su pagina 1
-            nextButton.disabled = (currentPage === 3); // Disabilita "Avanti" su pagina 4
+            prevButton.disabled = (currentPage === 1);
+            nextButton.disabled = (currentPage === 3);
         }
 
         // Event listener per il pulsante Avanti
         nextButton.addEventListener('click', () => {
-            if (currentPage < 3) currentPage++;
-            updatePages();
+            if (currentPage < 3) {
+                currentPage++;
+                pages[currentPage].style.transform = 'translateX(100%)';
+                updatePages();
+                pages[currentPage].style.transform = 'translateX(0)';
+            }
         });
 
         // Event listener per il pulsante Indietro
         prevButton.addEventListener('click', () => {
-            if (currentPage > 1) currentPage--;
-            updatePages();
+            if (currentPage > 1) {
+                currentPage--;
+                pages[currentPage].style.transform = 'translateX(-100%)';
+                updatePages();
+                pages[currentPage].style.transform = 'translateX(0)';
+            }
         });
 
         // Inizializza la visualizzazione delle pagine
