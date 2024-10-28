@@ -5,127 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Digitale</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('sfondo.jpg') center center / cover no-repeat;
-            overflow: hidden;
+            margin: 0;
+            background-color: #f0f0f0; /* Colore di sfondo */
         }
         .container {
             display: flex;
-            width: 90vw;
-            height: 90vh;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Occupa l'intera altezza della finestra */
             position: relative;
         }
         .page {
-            width: 50%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            width: 50%; /* Ogni pagina occupa il 50% dello schermo */
+            height: auto; /* Mantieni l'altezza automatica */
+            transition: opacity 0.5s ease, left 0.5s ease; /* Transizione per la visibilità e il movimento */
+            position: absolute; /* Posizionamento assoluto */
+            opacity: 0; /* Inizialmente invisibile */
         }
-        .page img {
-            width: 100%;
-            height: auto;
+        .visible {
+            opacity: 1; /* Mostra la pagina quando è visibile */
         }
         .hidden {
-            display: none;
-        }
-        .buttons {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: space-between;
-            width: 80%; /* Distanza più ampia per i pulsanti */
+            display: none; /* Nasconde la pagina */
         }
         .button {
-            background-color: transparent; /* Bottone trasparente */
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 36px; /* Dimensione maggiore per le frecce */
-            transition: background-color 0.3s; /* Aggiunta transizione */
-            width: 45%; /* Aumenta la larghezza dei pulsanti */
+            position: absolute;
+            bottom: 20px; /* Posiziona i pulsanti in basso */
+            background-color: transparent; /* Pulsante trasparente */
+            border: none; /* Rimuovi il bordo */
+            font-size: 24px; /* Dimensione del testo */
+            cursor: pointer; /* Cambia il cursore su hover */
         }
-        .button:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* Effetto hover */
+        .left {
+            left: 20px; /* Pulsante a sinistra */
+        }
+        .right {
+            right: 20px; /* Pulsante a destra */
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <img id="page1" class="page" src="pagina1.jpg" style="left: 1328px;"> <!-- Posizionata a destra -->
+        <img id="page2" class="page" src="pagina2.jpg">
+        <img id="page3" class="page" src="pagina3.jpg">
+        <img id="page4" class="page" src="pagina4.jpg" style="left: 0;"> <!-- Posizionata a sinistra -->
 
-<div class="container" id="menuContainer">
-    <!-- Pagina 1 - Posizionata a destra -->
-    <div class="page" id="page1">
-        <img src="pagina1.jpg" alt="Pagina 1">
+        <button class="button left" onclick="changePage(-1)">&#9664;</button> <!-- Freccia sinistra -->
+        <button class="button right" onclick="changePage(1)">&#9654;</button> <!-- Freccia destra -->
     </div>
-    <!-- Pagina 2 e 3 - Posizionate al centro -->
-    <div class="page hidden" id="page2">
-        <img src="pagina2.jpg" alt="Pagina 2">
-    </div>
-    <div class="page hidden" id="page3">
-        <img src="pagina3.jpg" alt="Pagina 3">
-    </div>
-    <!-- Pagina 4 - Posizionata a sinistra -->
-    <div class="page hidden" id="page4">
-        <img src="pagina4.jpg" alt="Pagina 4">
-    </div>
-</div>
 
-<div class="buttons">
-    <button class="button" onclick="prevPage()">⬅️</button>
-    <button class="button" onclick="nextPage()">➡️</button>
-</div>
+    <script>
+        let currentPage = 0;
 
-<script>
-    let currentPage = 0;
-
-    function updatePages() {
-        // Nasconde tutte le pagine
-        document.getElementById("page1").classList.add("hidden"); // Nascondi pagina 1
-        document.getElementById("page2").classList.add("hidden"); // Nascondi pagina 2
-        document.getElementById("page3").classList.add("hidden"); // Nascondi pagina 3
-        document.getElementById("page4").classList.add("hidden"); // Nascondi pagina 4
-
-        // Mostra la pagina corretta in base a currentPage
-        if (currentPage === 0) {
-            document.getElementById("page1").classList.remove("hidden"); // Mostra solo pagina 1
-        } else if (currentPage === 1) {
-            document.getElementById("page2").classList.remove("hidden"); // Mostra pagina 2
-            document.getElementById("page3").classList.remove("hidden"); // e pagina 3
-        } else if (currentPage === 2) {
-            document.getElementById("page4").classList.remove("hidden"); // Mostra solo pagina 4
-        }
-    }
-
-    function nextPage() {
-        if (currentPage < 2) {
-            currentPage++;
+        function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 0) currentPage = 0;
+            if (currentPage > 2) currentPage = 2;
             updatePages();
         }
-    }
 
-    function prevPage() {
-        if (currentPage > 0) {
-            currentPage--;
-            updatePages();
+        function updatePages() {
+            // Nascondi tutte le pagine
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page2").classList.add("hidden");
+            document.getElementById("page3").classList.add("hidden");
+            document.getElementById("page4").classList.add("hidden");
+
+            if (currentPage === 0) {
+                // Mostra Pagina 1
+                document.getElementById("page1").style.left = '1328px'; // Sposta pagina 1 a destra
+                document.getElementById("page1").classList.remove("hidden"); // Mostra pagina 1
+                document.getElementById("page1").classList.add("visible");
+            } else if (currentPage === 1) {
+                // Mostra Pagina 2 e Pagina 3
+                document.getElementById("page2").classList.remove("hidden");
+                document.getElementById("page3").classList.remove("hidden");
+                document.getElementById("page2").classList.add("visible");
+                document.getElementById("page3").classList.add("visible");
+            } else if (currentPage === 2) {
+                // Mostra Pagina 4
+                document.getElementById("page4").classList.remove("hidden");
+                document.getElementById("page4").classList.add("visible");
+            }
         }
-    }
 
-    // Visualizza la prima pagina all'avvio
-    updatePages();
-</script>
-
+        // Inizializza la visualizzazione della prima pagina
+        updatePages();
+    </script>
 </body>
 </html>
