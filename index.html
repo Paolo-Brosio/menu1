@@ -57,7 +57,7 @@
 <body>
 
 <div class="container" id="menuContainer">
-    <!-- Posiziono pagina 1 a destra -->
+    <!-- Visualizza pagina 1 inizialmente a destra -->
     <div class="page hidden" id="page2">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
@@ -67,7 +67,7 @@
     <div class="page hidden" id="page4">
         <img src="pagina4.jpg" alt="Pagina 4">
     </div>
-    <div class="page" id="page1"> <!-- Mostra pagina 1 inizialmente a destra -->
+    <div class="page" id="page1" style="order: 2;"> <!-- Visualizza pagina 1 inizialmente a destra -->
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
 </div>
@@ -81,7 +81,7 @@
     let currentPage = 0;
 
     function updatePages() {
-        // Nasconde tutte le pagine all'inizio
+        // Nasconde tutte le pagine
         document.getElementById("page1").classList.add("hidden");
         document.getElementById("page2").classList.add("hidden");
         document.getElementById("page3").classList.add("hidden");
