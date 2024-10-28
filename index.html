@@ -19,7 +19,7 @@
         .page {
             width: 50%; /* Ogni pagina occupa il 50% dello schermo */
             height: auto; /* Mantieni l'altezza automatica */
-            transition: opacity 0.5s ease, left 0.5s ease; /* Transizione per la visibilità e il movimento */
+            transition: opacity 0.5s ease; /* Transizione per la visibilità */
             position: absolute; /* Posizionamento assoluto */
             opacity: 0; /* Inizialmente invisibile */
         }
@@ -47,6 +47,7 @@
 </head>
 <body>
     <div class="container">
+        <img id="page0" class="page" src="pagina0.jpg" style="left: 0;"> <!-- Prima pagina a sinistra -->
         <img id="page1" class="page" src="pagina1.jpg" style="left: 1328px;"> <!-- Posizionata a destra -->
         <img id="page2" class="page" src="pagina2.jpg">
         <img id="page3" class="page" src="pagina3.jpg">
@@ -62,27 +63,30 @@
         function changePage(direction) {
             currentPage += direction;
             if (currentPage < 0) currentPage = 0;
-            if (currentPage > 2) currentPage = 2;
+            if (currentPage > 3) currentPage = 3; // Cambiato a 3 per includere pagina4
             updatePages();
         }
 
         function updatePages() {
             // Nascondi tutte le pagine
+            document.getElementById("page0").classList.add("hidden");
             document.getElementById("page1").classList.add("hidden");
             document.getElementById("page2").classList.add("hidden");
             document.getElementById("page3").classList.add("hidden");
             document.getElementById("page4").classList.add("hidden");
 
             if (currentPage === 0) {
+                // Mostra Pagina 0
+                document.getElementById("page0").classList.remove("hidden");
+                document.getElementById("page0").classList.add("visible");
+            } else if (currentPage === 1) {
                 // Mostra Pagina 1
                 document.getElementById("page1").style.left = '1328px'; // Sposta pagina 1 a destra
                 document.getElementById("page1").classList.remove("hidden"); // Mostra pagina 1
                 document.getElementById("page1").classList.add("visible");
-            } else if (currentPage === 1) {
-                // Mostra Pagina 2 e Pagina 3
-                document.getElementById("page2").classList.remove("hidden");
-                document.getElementById("page3").classList.remove("hidden");
+                document.getElementById("page2").classList.remove("hidden"); // Mostra pagina 2
                 document.getElementById("page2").classList.add("visible");
+                document.getElementById("page3").classList.remove("hidden"); // Mostra pagina 3
                 document.getElementById("page3").classList.add("visible");
             } else if (currentPage === 2) {
                 // Mostra Pagina 4
