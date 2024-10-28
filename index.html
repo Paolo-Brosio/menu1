@@ -45,19 +45,21 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 40px;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px; /* Aggiunto padding per rendere i pulsanti più distanti dai bordi */
         }
         .button {
-            background-color: rgba(0, 0, 255, 0.3);
+            background-color: transparent; /* Bottone trasparente */
             color: white;
             border: none;
             padding: 10px;
             cursor: pointer;
-            font-size: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 36px; /* Dimensione maggiore per le frecce */
+            transition: background-color 0.3s; /* Aggiunta transizione */
+        }
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Effetto hover */
         }
     </style>
 </head>
@@ -74,7 +76,7 @@
     <div class="page hidden" id="page4">
         <img src="pagina4.jpg" alt="Pagina 4">
     </div>
-    <div class="page" id="page1"> <!-- Pagina 1, inizialmente visibile e posizionata a destra -->
+    <div class="page" id="page1"> <!-- Pagina 1, inizialmente visibile a destra -->
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
 </div>
@@ -124,4 +126,4 @@
 </script>
 
 </body>
-</html>
+</html> 
