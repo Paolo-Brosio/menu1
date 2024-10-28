@@ -21,32 +21,32 @@
         }
         .container {
             display: flex;
-            width: 90%; /* Larghezza del contenitore */
-            height: 100%; /* Altezza del contenitore */
+            width: 90%;
+            height: 100%;
             position: relative;
         }
         .page {
-            width: 50%; /* Ogni pagina occupa il 50% dello spazio */
-            height: 100%; /* Altezza piena */
+            width: 50%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .page img {
-            width: 100%; /* Immagini riempiono il box */
-            height: auto; /* Mantiene il rapporto d'aspetto */
+            width: 100%;
+            height: auto;
         }
         .hidden {
-            display: none; /* Classe per nascondere le pagine */
+            display: none;
         }
         .buttons {
             position: absolute;
-            bottom: 20px; /* Posizione dei bottoni */
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
         }
         .button {
-            background-color: rgba(0, 0, 255, 0.5); /* Colore blu trasparente */
+            background-color: rgba(0, 0, 255, 0.5);
             color: white;
             border: none;
             padding: 10px 20px;
@@ -58,16 +58,16 @@
 <body>
 
 <div class="container" id="menuContainer">
-    <div class="page" id="page2" class="hidden">
+    <div class="page hidden" id="page2">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
-    <div class="page" id="page3" class="hidden">
+    <div class="page hidden" id="page3">
         <img src="pagina3.jpg" alt="Pagina 3">
     </div>
     <div class="page" id="page1">
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
-    <div class="page" id="page4" class="hidden">
+    <div class="page hidden" id="page4">
         <img src="pagina4.jpg" alt="Pagina 4">
     </div>
 </div>
@@ -82,17 +82,15 @@
     const pages = document.querySelectorAll('.page');
 
     function updatePages() {
-        pages.forEach((page, index) => {
-            page.classList.add('hidden'); // Nascondi tutte le pagine
-        });
+        pages.forEach(page => page.classList.add('hidden'));
 
         if (currentPage === 0) {
-            pages[2].classList.remove('hidden'); // Mostra Pagina 1 (ora a destra)
+            pages[2].classList.remove('hidden'); // Mostra Pagina 1 a destra
         } else if (currentPage === 1) {
-            pages[0].classList.remove('hidden'); // Mostra Pagina 2
-            pages[1].classList.remove('hidden'); // Mostra Pagina 3
+            pages[0].classList.remove('hidden'); // Mostra Pagina 2 a sinistra
+            pages[1].classList.remove('hidden'); // Mostra Pagina 3 a destra
         } else if (currentPage === 2) {
-            pages[3].classList.remove('hidden'); // Mostra Pagina 4
+            pages[3].classList.remove('hidden'); // Mostra Pagina 4 a sinistra
         }
     }
 
@@ -110,8 +108,7 @@
         }
     }
 
-    // Inizializza mostrando la prima pagina
-    updatePages();
+    updatePages(); // Inizializza mostrando la prima pagina
 </script>
 
 </body>
