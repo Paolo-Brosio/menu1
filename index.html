@@ -23,12 +23,8 @@
         .container {
             position: relative;
             width: 90%;
-            max-width: 500px;
+            max-width: 500px; /* Larghezza massima per dispositivi */
             height: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* Disporre le pagine in colonna */
         }
         .pages {
             display: none; /* Nascondi tutte le pagine per impostazione predefinita */
@@ -48,14 +44,14 @@
         }
         /* Pagina singola centrata */
         #page1 {
-            top: 25%; /* Posizionamento verticale di pagina 1 */
-            height: 70%; /* Altezza per pagina 1 */
+            top: 0; /* Pagina 1 in alto */
+            height: 100%; /* Altezza per pagina 1 */
         }
         /* Due pagine affiancate */
         #page2-3 {
             display: flex;
-            top: 25%; /* Posizionamento verticale per pagina 2 e 3 */
-            height: 70%; /* Altezza per pagine 2 e 3 */
+            top: 0; /* Posizionamento verticale per pagina 2 e 3 */
+            height: 100%; /* Altezza per pagine 2 e 3 */
         }
         #page2-3 img {
             max-width: 50%; /* Ogni pagina occupa metà dello schermo */
@@ -63,8 +59,8 @@
         }
         /* Pagina singola a sinistra */
         #page4 {
-            top: 25%; /* Posizionamento verticale di pagina 4 */
-            height: 70%; /* Altezza per pagina 4 */
+            top: 0; /* Pagina 4 in alto */
+            height: 100%; /* Altezza per pagina 4 */
         }
         /* Stile dei pulsanti */
         .button-container {
