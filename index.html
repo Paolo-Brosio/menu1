@@ -57,17 +57,18 @@
 <body>
 
 <div class="container" id="menuContainer">
+    <!-- Posiziono pagina 1 a destra -->
     <div class="page hidden" id="page2">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
     <div class="page hidden" id="page3">
         <img src="pagina3.jpg" alt="Pagina 3">
     </div>
-    <div class="page hidden" id="page1">
-        <img src="pagina1.jpg" alt="Pagina 1">
-    </div>
     <div class="page hidden" id="page4">
         <img src="pagina4.jpg" alt="Pagina 4">
+    </div>
+    <div class="page" id="page1"> <!-- Mostra pagina 1 inizialmente a destra -->
+        <img src="pagina1.jpg" alt="Pagina 1">
     </div>
 </div>
 
@@ -86,7 +87,7 @@
         document.getElementById("page3").classList.add("hidden");
         document.getElementById("page4").classList.add("hidden");
 
-        // Logica per visualizzare la pagina corretta
+        // Visualizza la pagina corretta
         if (currentPage === 0) {
             document.getElementById("page1").classList.remove("hidden"); // Mostra Pagina 1 a destra
         } else if (currentPage === 1) {
@@ -117,5 +118,3 @@
 
 </body>
 </html>
-
-<!-- Nota: ramarro -->
