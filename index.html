@@ -44,40 +44,44 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
+            gap: 20px; /* Spaziatura tra le frecce */
         }
-        .button {
-            background-color: rgba(0, 0, 255, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 20px;
+        .button img {
+            width: 50px; /* Larghezza delle frecce */
+            height: auto;
             cursor: pointer;
-            margin: 0 10px;
+            opacity: 0.7; /* Leggera trasparenza */
+        }
+        .button img:hover {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
 <div class="container" id="menuContainer">
-    <div class="page hidden" id="page0">
-        <img src="pagina0.png" alt="Pagina 0">
-    </div>
-    <div class="page hidden" id="page2">
+    <div class="page" id="page2" class="hidden">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
-    <div class="page hidden" id="page3">
+    <div class="page" id="page3" class="hidden">
         <img src="pagina3.jpg" alt="Pagina 3">
     </div>
     <div class="page" id="page1">
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
-    <div class="page hidden" id="page4">
+    <div class="page" id="page4" class="hidden">
         <img src="pagina4.jpg" alt="Pagina 4">
     </div>
 </div>
 
 <div class="buttons">
-    <button class="button" onclick="prevPage()">Indietro</button>
-    <button class="button" onclick="nextPage()">Avanti</button>
+    <div class="button" onclick="prevPage()">
+        <img src="frecciasx.png" alt="Indietro">
+    </div>
+    <div class="button" onclick="nextPage()">
+        <img src="frecciadx.png" alt="Avanti">
+    </div>
 </div>
 
 <script>
@@ -90,13 +94,12 @@
         });
 
         if (currentPage === 0) {
-            pages[0].classList.remove('hidden'); // Mostra Pagina 0 (sinistra)
-            pages[3].classList.remove('hidden'); // Mostra Pagina 1 (destra)
+            pages[2].classList.remove('hidden');
         } else if (currentPage === 1) {
-            pages[1].classList.remove('hidden'); // Mostra Pagina 2 (sinistra)
-            pages[2].classList.remove('hidden'); // Mostra Pagina 3 (destra)
+            pages[0].classList.remove('hidden');
+            pages[1].classList.remove('hidden');
         } else if (currentPage === 2) {
-            pages[4].classList.remove('hidden'); // Mostra Pagina 4 (sinistra)
+            pages[3].classList.remove('hidden');
         }
     }
 
@@ -114,7 +117,6 @@
         }
     }
 
-    // Inizializza mostrando la prima pagina
     updatePages();
 </script>
 
