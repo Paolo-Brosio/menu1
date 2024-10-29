@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Digitale</title>
+    <title>Menu Digitale con Libro Sfogliabile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
     <style>
-        /* Stile di base */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Hind', sans-serif;
         }
         body {
             display: flex;
@@ -18,13 +21,15 @@
             height: 100vh;
             background: url('sfondo.jpg') center center / cover no-repeat;
             overflow: hidden;
+            background-color: #383838;
         }
         .container {
             display: flex;
-            bottom: 70px;
             width: 90%;
-            height: 80%; /* Altezza del contenitore aumentata */
+            height: 80%;
             position: relative;
+            justify-content: center;
+            align-items: center;
         }
         .page {
             width: 50%;
@@ -42,7 +47,7 @@
         }
         .buttons {
             position: absolute;
-            bottom: 20px; /* Posizione regolata in basso */
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -51,7 +56,7 @@
             padding: 0 10px;
         }
         .button {
-            background-color: transparent; /* Rimosso il blu per renderlo trasparente */
+            background-color: transparent;
             border: none;
             cursor: pointer;
             margin: 0 10px;
@@ -59,6 +64,58 @@
         .button img {
             width: 90px; /* Dimensioni delle frecce regolate */
             height: auto;
+        }
+
+        /* Stili per il libro sfogliabile */
+        .book {
+            background-color: #fff;
+            width: 300px;
+            height: 200px;
+            border-radius: 20px;
+            perspective: 600px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px; /* Margine superiore per distanziare dalle frecce */
+        }
+        .book::before {
+            content: '';
+            position: absolute;
+            z-index: 5;
+            width: 50%;
+            height: 100%;
+            right: 50%;
+            background-color: #707070;
+            border-radius: 20px 0 0 20px;
+            transform-origin: center right;
+            transform: rotateY(180deg);
+            transition: 0.7s ease all;
+        }
+        .book:hover::before {
+            transform: rotateY(0deg);
+        }
+        .book .pg {
+            position: absolute;
+            width: 50%;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .book .pg.pg1 {
+            background-color: #ee5f2a;
+            border-radius: 20px 0 0 20px;
+            left: 0;
+        }
+        .book .pg.pg2 {
+            background-color: #30a5da;
+            right: 0;
+            border-radius: 0 20px 20px 0;
         }
     </style>
 </head>
@@ -85,6 +142,11 @@
 <div class="buttons">
     <button class="button" onclick="prevPage()"><img src="frecciasx.png" alt="Indietro"></button>
     <button class="button" onclick="nextPage()"><img src="frecciadx.png" alt="Avanti"></button>
+</div>
+
+<div class="book">
+    <div class="pg pg1">HTML</div>
+    <div class="pg pg2">CSS</div>
 </div>
 
 <script>
