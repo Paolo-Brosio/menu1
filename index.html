@@ -22,8 +22,9 @@
         .container {
             display: flex;
             width: 90%;
-            height: 100%;
+            height: 80%; /* Altezza del contenitore aumentata */
             position: relative;
+            margin-top: 50px; /* Aggiunto margine superiore */
         }
         .page {
             width: 50%;
@@ -41,20 +42,23 @@
         }
         .buttons {
             position: absolute;
-            bottom: 50px; /* Abbassato per creare margine significativo tra le pagine e le frecce */
+            bottom: 10px; /* Posizione regolata in basso */
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             display: flex;
-            justify-content: space-between; /* Posiziona le frecce ai bordi */
-            padding: 0 10px; /* Aggiunge spazio laterale per mantenere le frecce vicine ai bordi */
+            justify-content: space-between;
+            padding: 0 10px;
         }
         .button {
-            width: 50px; /* Larghezza fissa per le frecce */
-            height: 50px; /* Altezza fissa per le frecce */
+            background-color: transparent; /* Rimosso il blu per renderlo trasparente */
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
         }
         .button img {
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
+            width: 60px; /* Dimensioni delle frecce regolate */
+            height: auto;
         }
     </style>
 </head>
@@ -79,12 +83,8 @@
 </div>
 
 <div class="buttons">
-    <div class="button" onclick="prevPage()">
-        <img src="frecciasx.png" alt="Indietro">
-    </div>
-    <div class="button" onclick="nextPage()">
-        <img src="frecciadx.png" alt="Avanti">
-    </div>
+    <button class="button" onclick="prevPage()"><img src="frecciasx.png" alt="Indietro"></button>
+    <button class="button" onclick="nextPage()"><img src="frecciadx.png" alt="Avanti"></button>
 </div>
 
 <script>
