@@ -41,14 +41,14 @@
         }
         .buttons {
             position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 10px; /* Abbassamento delle frecce */
+            width: 100%;
             display: flex;
-            gap: 20px; /* Spazio tra le frecce */
+            justify-content: space-between; /* Posiziona le frecce ai bordi */
+            padding: 0 10px; /* Aggiunge spazio laterale per mantenere le frecce vicine ai bordi */
         }
         .button img {
-            width: 50px; /* Larghezza delle immagini delle frecce */
+            width: 50px;
             height: auto;
             cursor: pointer;
         }
