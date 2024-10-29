@@ -61,13 +61,16 @@
 <body>
 
 <div class="container" id="menuContainer">
+    <div class="page" id="page0">
+        <img src="pagina0.png" alt="Pagina 0">
+    </div>
     <div class="page" id="page2" class="hidden">
         <img src="pagina2.jpg" alt="Pagina 2">
     </div>
     <div class="page" id="page3" class="hidden">
         <img src="pagina3.jpg" alt="Pagina 3">
     </div>
-    <div class="page" id="page1">
+    <div class="page" id="page1" class="hidden">
         <img src="pagina1.jpg" alt="Pagina 1">
     </div>
     <div class="page" id="page4" class="hidden">
@@ -94,12 +97,12 @@
         });
 
         if (currentPage === 0) {
-            pages[2].classList.remove('hidden');
+            pages[0].classList.remove('hidden'); // Mostra Pagina 0
         } else if (currentPage === 1) {
-            pages[0].classList.remove('hidden');
-            pages[1].classList.remove('hidden');
+            pages[2].classList.remove('hidden'); // Mostra Pagina 2
+            pages[3].classList.remove('hidden'); // Mostra Pagina 3
         } else if (currentPage === 2) {
-            pages[3].classList.remove('hidden');
+            pages[4].classList.remove('hidden'); // Mostra Pagina 4
         }
     }
 
@@ -117,6 +120,7 @@
         }
     }
 
+    // Inizializza mostrando la prima pagina
     updatePages();
 </script>
 
